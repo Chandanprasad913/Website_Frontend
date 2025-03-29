@@ -16,7 +16,7 @@ const Footer = () => {
         </div>
 
         {/* Company Links */}
-        <div>
+        <div className="mt-14">
           <p className="mb-5 text-lg font-semibold text-gray-800">Company</p>
           <ul className="flex flex-col gap-2 text-gray-600">
             <li className="hover:text-gray-900 transition-all cursor-pointer">Home</li>
@@ -27,7 +27,7 @@ const Footer = () => {
         </div>
 
         {/* Contact Info */}
-        <div>
+        <div className="mt-14">
           <p className="mb-5 text-lg font-semibold text-gray-800">Get in Touch</p>
           <ul className="flex flex-col gap-2 text-gray-600">
             <li className="hover:text-gray-900 transition-all cursor-pointer">+91 1234567890</li>
