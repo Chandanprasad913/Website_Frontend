@@ -53,6 +53,18 @@ import p_img49 from './p_img49.png'
 import p_img50 from './p_img50.png'
 import p_img51 from './p_img51.png'
 import p_img52 from './p_img52.png'
+import Hoodie from "./hoodie.png"
+import Hoodie01 from "./hoodie01.png"
+import suitJacket from "./suitJacket.png"
+import suitJacket01 from "./suitJacket01.png"
+import suitJacket02 from "./suitJacket02.png"
+import newJacket from "./newJacket.png"
+import modernDress from "./modernDress.png"
+import modernDress01 from "./modernDress01.png"
+import modernDress02 from "./modernDress02.png"
+import partywear from "./partywear.png"
+import partywear01 from "./partywear01.png"
+
 
 
 import hero_img from './hero_img.png'
@@ -82,12 +94,10 @@ import posterImg7 from "./poster7.png"
 import posterImg8 from "./poster8.png"
 import posterImg9 from "./poster9.png"
 import mLogo from "./mLogo.png"
-import mLogo2 from "./MLogo.svg"
 
 export const assets = {
-    
+
     mLogo,
-    mLogo2,
     hero_img,
     posterImg1,
     posterImg2,
@@ -113,21 +123,81 @@ export const assets = {
     contact_img,
     razorpay_logo,
     stripe_logo,
-    cross_icon
+    cross_icon,
+    // -------
+    Hoodie,
+    Hoodie01,
+    suitJacket,
+    suitJacket01,
+    suitJacket02,
+    newJacket,
+    modernDress,
+    modernDress01,
+    modernDress02,
+    partywear,
+    partywear01
 }
 
 export const products = [
     {
-        _id: "aaaaa",
-        name: "Women Round Neck Cotton Top",
-        description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
-        price: 1035,
-        image: [p_img1],
-        category: "Women",
-        subCategory: "Topwear",
-        sizes: ["S", "M", "L"],
-        date: 1716634345448,
-        bestseller: true
+        "_id": "mens-jacket",
+        "name": "Men's Elite Edge Jacket",
+        "description": "Stay ahead in style with our Men's Elite Edge Jacket—crafted for those who value both fashion and functionality. Designed with high-quality materials for maximum comfort and durability, this versatile jacket is perfect for any season, making it a must-have in your wardrobe.",
+        "price": 3499,
+        "image": [newJacket],
+        "category": "Men",
+        "subCategory": "Winterwear",
+        "sizes": ["S", "M", "L", "XL"],
+        "date": 1716634345448,
+        "bestseller": true
+    },
+    {
+        "_id": "women-dress",
+        "name": "Enchanted Blossom Ruffle Dress",
+        "description": "Turn heads with the Enchanted Blossom Ruffle Dress—where elegance meets modern charm. Designed with a flattering one-shoulder ruffle detail and a sleek floral satin finish, this dress exudes sophistication. The fitted silhouette and flared hem add a touch of drama, making it the perfect choice for upscale evenings, special occasions, or a luxurious night out.",
+        "price": 3299,
+        "image": [modernDress, modernDress01, modernDress02],
+        "category": "Women",
+        "subCategory": "Topwear",
+        "sizes": ["XS", "S", "M", "L", "XL"],
+        "date": 1716634345448,
+        "bestseller": true
+    },
+    {
+        "_id": "mens_hoodie",
+        "name": "Men's Premium Hoodie",
+        "description": "Stay effortlessly stylish with our premium men's hoodie—crafted for comfort, designed for versatility. Lightweight, breathable, and perfect for layering, this pullover features a snug round neckline and a relaxed fit, making it your go-to choice for any occasion.",
+        "price": 1035,
+        "image": [Hoodie, Hoodie01],
+        "category": "Men",
+        "subCategory": "Topwear",
+        "sizes": ["S", "M", "L", "XL"],
+        "date": 1716634345448,
+        "bestseller": true
+    },
+    {
+        "_id": "mens_suit_jacket",
+        "name": "Men's Premium Suit Jacket",
+        "description": "Elevate your style with our impeccably tailored Men's Premium Suit Jacket. Designed for a sharp, sophisticated look, this jacket blends classic elegance with modern comfort. Perfect for formal occasions or smart casual settings, its premium fabric and flawless fit make it a wardrobe essential.",
+        "price": 4999,
+        "image": [suitJacket, suitJacket01, suitJacket02],
+        "category": "Men",
+        "subCategory": "Winterwear",
+        "sizes": ["S", "M", "L", "XL"],
+        "date": 1716634345448,
+        "bestseller": false
+    },
+    {
+        "_id": "women-party-dress",
+        "name": "Luxe Radiance Party Dress",
+        "description": "Shine effortlessly in the Luxe Radiance Party Dress—a perfect blend of sophistication and modern glam. Crafted with premium fabric and tailored for a flattering fit, this dress features elegant details that make it ideal for cocktail nights, celebrations, and high-end gatherings. A must-have for those who love to make a statement with style.",
+        "price": 4799,
+        "image": [partywear, partywear01],
+        "category": "Women",
+        "subCategory": "Topwear",
+        "sizes": ["XS", "S", "M", "L", "XL"],
+        "date": 1716634345448,
+        "bestseller": false
     },
     {
         _id: "aaaab",
@@ -139,6 +209,18 @@ export const products = [
         subCategory: "Topwear",
         sizes: ["M", "L", "XL"],
         date: 1716621345448,
+        bestseller: true
+    },
+    {
+        _id: "aaaaa",
+        name: "Women Round Neck Cotton Top",
+        description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
+        price: 1035,
+        image: [p_img1],
+        category: "Women",
+        subCategory: "Topwear",
+        sizes: ["S", "M", "L"],
+        date: 1716634345448,
         bestseller: true
     },
     {
