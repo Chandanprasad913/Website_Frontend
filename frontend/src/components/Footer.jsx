@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="my-10 mt-40 grid gap-14 text-sm sm:grid-cols-[3fr_1fr_1fr]">
         
         {/* Brand Info */}
-        <div>
+        <div className="mt-14">
           <img src={assets.mLogo} className="mb-5 w-44" alt="Brand Logo" />
           <p className="text-gray-600 md:w-3/4">
             Bringing you the best products with unmatched quality and service.
