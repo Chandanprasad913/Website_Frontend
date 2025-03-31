@@ -1,11 +1,32 @@
-const NewsLetterBox = () => {
-    const onSubmitHandler = (e) => {
-        e.preventDefault();
-    }
+import { useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
+const NewsLetterBox = () => {
+  const [email, setEmail] = useState("");
+
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    
+    if (!email) return; // Prevent empty submissions
+
+    toast.success("Welcome to the cool club! Your discount code is waiting in your inbox. 🕶️🎉", {
+      position: "top-right",
+      autoClose: 3000, // Closes after 3 sec
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+
+    setEmail(""); // Clear input field
+  };
 
   return (
     <div className="text-center">
+      <ToastContainer /> {/* Toast container to display notifications */}
+      
       <p className="text-2xl font-medium text-gray-800">
         Subscribe to our newsletter and get 20% off your first purchase
       </p>
@@ -19,6 +40,8 @@ const NewsLetterBox = () => {
           type="email"
           placeholder="Enter your email"
           className="w-full outline-none sm:flex-1"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           required
         />
         <button type="submit" className="cursor-pointer bg-black px-10 py-4 text-white">
@@ -28,4 +51,5 @@ const NewsLetterBox = () => {
     </div>
   );
 };
+
 export default NewsLetterBox;

@@ -11,12 +11,20 @@ import Orders from "./pages/Orders.jsx";
 import Navbar from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
 import SearchBar from "./components/SearchBar.jsx";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   return (
     <div className="sm:[5vw] px-4 md:px-[7vw] lg:px-[9vw]">
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        pauseOnFocusLoss={false}
+      />
+
       <Navbar />
-      <SearchBar/>
+      <SearchBar />
 
       <Routes>
         <Route path="/" element={<Home />} />

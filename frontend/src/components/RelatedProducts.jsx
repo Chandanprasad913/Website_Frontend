@@ -9,32 +9,41 @@ const RelatedProducts = ({ category, subCategory }) => {
 
   useEffect(() => {
     if (products.length > 0) {
-      let productCopy = [...products];
-      productCopy = productCopy.filter((item) => category === item.category);
-      productCopy = productCopy.filter(
-        (item) => subCategory === item.subCategory,
-      );
+      const filteredProducts = products
+        .filter(
+          (item) =>
+            item.category === category && item.subCategory === subCategory,
+        )
+        .slice(0, 5); // Limit to 5 products
 
-      setRelated(productCopy.slice(0, 5));
+      setRelated(filteredProducts);
     }
   }, [products, category, subCategory]);
+
   return (
     <div className="my-24">
       <div className="py-2 text-center text-3xl">
         <Title text1="RELATED" text2="PRODUCTS" />
       </div>
       <div className="grid grid-cols-2 gap-4 gap-y-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-        {related.map((item, index) => (
-          <ProductItem
-            key={index}
-            id={item._id}
-            image={item.image}
-            name={item.name}
-            price={item.price}
-          />
-        ))}
+        {related.length > 0 ? (
+          related.map((item) => (
+            <ProductItem
+              key={item._id}
+              id={item._id}
+              image={item.image}
+              name={item.name}
+              price={item.price}
+            />
+          ))
+        ) : (
+          <p className="col-span-full text-center text-gray-500">
+            No related products found.
+          </p>
+        )}
       </div>
     </div>
   );
 };
+
 export default RelatedProducts;
