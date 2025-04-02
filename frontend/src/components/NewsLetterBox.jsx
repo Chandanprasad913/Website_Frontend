@@ -12,7 +12,7 @@ const NewsLetterBox = () => {
 
     toast.success("Welcome to the cool club! Your discount code is waiting in your inbox. 🕶️🎉", {
       position: "top-right",
-      autoClose: 3000, // Closes after 3 sec
+      autoClose: 2000, // Closes after 3 sec
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,

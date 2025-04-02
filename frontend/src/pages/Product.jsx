@@ -2,6 +2,8 @@ import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ShopContext } from "../context/ShopContext";
 import { assets } from "../assets/assets";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import RelatedProducts from "../components/RelatedProducts";
 
 const Product = () => {
@@ -100,7 +102,23 @@ const Product = () => {
 
           {/* Add to Cart Button */}
           <button
-            onClick={() => addToCart(productData._id, size)}
+            onClick={(e) => {
+              e.preventDefault();
+
+              if (!size) {
+                toast.error("Please select a size!", {
+                  position: "top-right",
+                  autoClose: 2000,
+                });
+                return;
+              }
+
+              addToCart(productData._id, size);
+              toast.success("Product added to cart!", {
+                position: "top-right",
+                autoClose: 2000,
+              });
+            }}
             className="cursor-pointer bg-black px-10 py-4 text-sm text-white transition hover:bg-gray-800 active:scale-95"
           >
             Add to Cart
