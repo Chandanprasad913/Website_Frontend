@@ -1,31 +1,36 @@
 import axios from "axios";
 import { useState } from "react";
-import { backendUrl } from "../App";
 import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { backendUrl } from "../App";
 
 const Login = ({ setToken }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const onSubmitHandler = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
     try {
-      e.preventDefault();
-      const response = await axios.post(backendUrl + "/api/user/admin", {
+      const response = await axios.post(`${backendUrl}/api/user/admin`, {
         email,
         password,
       });
+
       if (response.data.success) {
         setToken(response.data.token);
         toast.success(response.data.message);
       } else {
-        toast.error(response.data.message);
+        toast.error(response.data.message || "Login failed");
       }
-
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Invalid Credentials");
+    } finally {
+      setLoading(false);
       setEmail("");
       setPassword("");
-    } catch (error) {
-      console.log(error);
-      toast.error("Invalid Credentials");
     }
   };
 
@@ -37,7 +42,7 @@ const Login = ({ setToken }) => {
         <form onSubmit={onSubmitHandler}>
           <div className="mb-3 min-w-72">
             <p className="text-sm font-bold text-gray-700 mb-2">
-              Email Address:{" "}
+              Email Address:
             </p>
             <input
               onChange={(e) => setEmail(e.target.value)}
@@ -63,13 +68,15 @@ const Login = ({ setToken }) => {
 
           <button
             type="submit"
-            className="mt-2 w-full bg-black text-white py-2 rounded-xl hover:bg-gray-900 cursor-pointer transition duration-300 ease-in-out active:scale-95"
+            className="mt-2 w-full bg-black text-white py-2 rounded-xl hover:bg-gray-900 cursor-pointer transition duration-300 ease-in-out active:scale-95 disabled:opacity-50"
+            disabled={loading}
           >
-            Login
+            {loading ? "Logging in..." : "Login"}
           </button>
         </form>
       </div>
     </div>
   );
 };
+
 export default Login;
