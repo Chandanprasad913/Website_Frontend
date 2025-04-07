@@ -19,7 +19,7 @@ const Cart = () => {
         if (cartItems[itemId][size] > 0) {
           tempData.push({
             _id: itemId,
-            image: product.image ? product.image[0] : "",
+            image: product.images ? product.images[0] : "",
             name: product.name || "Unknown Product",
             price: product.price || 0,
             size: size,

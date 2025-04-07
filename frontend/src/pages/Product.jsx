@@ -17,7 +17,7 @@ const Product = () => {
     const foundProduct = products.find((item) => item._id === productId);
     if (foundProduct) {
       setProductData(foundProduct);
-      setImage(foundProduct.image[0]);
+      setImage(foundProduct.images[0]);
     } else {
       setProductData(null);
     }
@@ -38,7 +38,7 @@ const Product = () => {
         {/* Product Image */}
         <div className="flex flex-1 flex-col-reverse gap-3 sm:flex-row">
           <div className="flex w-full justify-between overflow-x-auto sm:w-[18.7%] sm:flex-col sm:justify-normal sm:overflow-y-scroll">
-            {productData.image.map((item, index) => (
+            {productData.images.map((item, index) => (
               <img
                 onClick={() => setImage(item)}
                 src={item}

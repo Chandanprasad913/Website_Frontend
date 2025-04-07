@@ -56,7 +56,7 @@ const Collection = () => {
     }
 
     setFilteredProducts(filtered);
-  }, [category, subCategory, sortType, products, search]);
+  }, [category, subCategory, sortType, products, search,products]);
 
   return (
     <div className="flex flex-col gap-1 border-t pt-10 sm:flex-row sm:gap-10">
@@ -146,7 +146,7 @@ const Collection = () => {
               <ProductItem
                 key={item._id}
                 id={item._id}
-                image={item.image}
+                images={item.images}
                 name={item.name}
                 price={item.price}
               />
