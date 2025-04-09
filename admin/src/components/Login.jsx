@@ -19,7 +19,7 @@ const Login = ({ setToken }) => {
         password,
       });
 
-      if (response.data.success) {
+      if (response.data.success) {        
         setToken(response.data.token);
         toast.success(response.data.message);
       } else {
