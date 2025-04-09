@@ -29,7 +29,7 @@ const Cart = () => {
       }
     }
     setCartData(tempData);
-  }, [cartItems, products]); // Added `products` as a dependency
+  }, [cartItems, products]); 
 
   return (
     <div className="border-t pt-14">

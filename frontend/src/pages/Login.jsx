@@ -1,11 +1,59 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { ShopContext } from "../context/ShopContext";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { FaEye, FaEyeSlash } from "react-icons/fa"; // 👁️ Import icons
 
 const Login = () => {
-  const [currentState, setCurrentState] = useState("Sign Up");
+  const [currentState, setCurrentState] = useState("Login");
+  const { token, setToken, navigate, backendUrl } = useContext(ShopContext);
 
-  const onSubmitHandler = (e) => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // 👁️ New state
+  const [loading, setLoading] = useState(false);
+
+  const onSubmitHandler = async (e) => {
     e.preventDefault();
+    setLoading(true);
+
+    try {
+      const endpoint =
+        currentState === "Sign Up"
+          ? `${backendUrl}/api/user/register`
+          : `${backendUrl}/api/user/login`;
+
+      const payload =
+        currentState === "Sign Up"
+          ? { name, email, password }
+          : { email, password };
+
+      const response = await axios.post(endpoint, payload);
+
+      if (response.data.success) {
+        setToken(response.data.token);
+        localStorage.setItem("token", response.data.token);
+        toast.success(response.data.message);
+        setName("");
+        setEmail("");
+        setPassword("");
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error(error.response?.data?.message || "Something went wrong!");
+    } finally {
+      setLoading(false);
+    }
   };
+
+  useEffect(() => {
+    if (token && navigate) {
+      navigate("/");
+    }
+  }, [token, navigate]);
 
   return (
     <form
@@ -17,10 +65,10 @@ const Login = () => {
         <hr className="h-[1.5px] w-8 border-none bg-gray-800" />
       </div>
 
-      {currentState === "Login" ? (
-        ""
-      ) : (
+      {currentState === "Sign Up" && (
         <input
+          onChange={(e) => setName(e.target.value)}
+          value={name}
           type="text"
           className="w-full rounded border border-gray-800 px-3 py-2"
           placeholder="Name"
@@ -29,42 +77,58 @@ const Login = () => {
       )}
 
       <input
+        onChange={(e) => setEmail(e.target.value)}
+        value={email}
         type="email"
         className="w-full rounded border border-gray-800 px-3 py-2"
         placeholder="Email"
         required
       />
-      <input
-        type="password"
-        className="w-full rounded border border-gray-800 px-3 py-2"
-        placeholder="password"
-        required
-      />
 
-      <div className="mt-[-8px] flex w-full justify-between text-sm">
-        <p className="cursor-pointer">forgot password?</p>
-
-        {currentState === "Login" ? (
-          <p
-            onClick={() => setCurrentState("Sign Up")}
-            className="cursor-pointer"
-          >
-            Create an account
-          </p>
-        ) : (
-          <p
-            onClick={() => setCurrentState("Login")}
-            className="cursor-pointer"
-          >
-            Login Here{" "}
-          </p>
-        )}
+      {/* 👁️ Password Input with Eye Icon */}
+      <div className="relative w-full">
+        <input
+          onChange={(e) => setPassword(e.target.value)}
+          value={password}
+          type={showPassword ? "text" : "password"}
+          className="w-full rounded border border-gray-800 px-3 py-2 pr-10"
+          placeholder="Password"
+          required
+        />
+        <span
+          onClick={() => setShowPassword(!showPassword)}
+          className="absolute right-3 top-2.5 cursor-pointer text-gray-600"
+        >
+          {showPassword ? <FaEyeSlash /> : <FaEye />}
+        </span>
       </div>
 
-      <button className="mt-2 w-full cursor-pointer rounded border border-gray-800 bg-black px-3 py-2 text-white">
-        {currentState === "Login" ? "Sign In" : "Sign Up"}
+      <div className="mt-[-8px] flex w-full justify-between text-sm">
+        <p className="cursor-pointer">Forgot password?</p>
+        <p
+          onClick={() =>
+            setCurrentState(currentState === "Login" ? "Sign Up" : "Login")
+          }
+          className="cursor-pointer text-blue-600 underline"
+        >
+          {currentState === "Login"
+            ? "Create an account"
+            : "Already have an account? Login"}
+        </p>
+      </div>
+
+      <button
+        disabled={loading}
+        className="mt-2 w-full cursor-pointer rounded border border-gray-800 bg-black px-3 py-2 text-white disabled:opacity-50"
+      >
+        {loading
+          ? "Please wait..."
+          : currentState === "Login"
+          ? "Sign In"
+          : "Sign Up"}
       </button>
     </form>
   );
 };
+
 export default Login;
