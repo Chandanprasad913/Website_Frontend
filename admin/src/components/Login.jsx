@@ -3,11 +3,17 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { backendUrl } from "../App";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 const Login = ({ setToken }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prev) => !prev);
+  };
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
@@ -19,7 +25,7 @@ const Login = ({ setToken }) => {
         password,
       });
 
-      if (response.data.success) {        
+      if (response.data.success) {
         setToken(response.data.token);
         toast.success(response.data.message);
       } else {
@@ -54,16 +60,22 @@ const Login = ({ setToken }) => {
             />
           </div>
 
-          <div className="mb-3 min-w-72">
+          <div className="mb-3 min-w-72 relative">
             <p className="text-sm font-bold text-gray-700 mb-2">Password</p>
             <input
               onChange={(e) => setPassword(e.target.value)}
               value={password}
-              className="placeholder:text-gray-400 text-sm rounded w-full px-3 py-2 border border-gray-300 outline-none"
-              type="password"
+              type={showPassword ? "text" : "password"}
               placeholder="Enter your password"
+              className="placeholder:text-gray-400 text-sm rounded w-full px-3 py-2 border border-gray-300 outline-none pr-10"
               required
             />
+            <div
+              onClick={togglePasswordVisibility}
+              className="absolute top-9 right-3 cursor-pointer text-gray-500"
+            >
+              {showPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
+            </div>
           </div>
 
           <button

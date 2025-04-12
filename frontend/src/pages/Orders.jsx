@@ -61,7 +61,7 @@ const Orders = () => {
               <div className="">
                 <p className="font-medium sm:text-base">{item.name}</p>
 
-                <div className="mt-2 flex items-center gap-3 text-base text-gray-700">
+                <div className="mt-1 flex items-center gap-3 text-base text-gray-700">
                   <p>
                     {currency}
                     {item.price}
@@ -69,7 +69,7 @@ const Orders = () => {
                   <p className="">Quantity : {item.quantity}</p>
                   <p className="">Size:{item.size} </p>
                 </div>
-                <p className="mt-2">
+                <p className="mt-1">
                   Date:{" "}
                   <span className="text-gray-400">
                     {" "}
@@ -77,12 +77,9 @@ const Orders = () => {
                   </span>
                 </p>
 
-                <p className="mt-2">
+                <p className="mt-1">
                   Payment:{" "}
-                  <span className="text-gray-400">
-                    {" "}
-                    {item.paymentMethod}{" "}
-                  </span>
+                  <span className="text-gray-400"> {item.paymentMethod} </span>
                 </p>
               </div>
             </div>
@@ -92,7 +89,10 @@ const Orders = () => {
                 <p className="text-sm md:text-base">{item.status}</p>
               </div>
 
-              <button className="cursor-pointer rounded-sm border px-4 py-2 text-sm font-medium">
+              <button
+                onClick={loadOrderData}
+                className="cursor-pointer rounded-sm border px-4 py-2 text-sm font-medium hover:bg-blue-500 hover:text-white active:scale-90"
+              >
                 Track Order
               </button>
             </div>
