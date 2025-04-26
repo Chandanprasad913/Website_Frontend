@@ -20,6 +20,10 @@ const userSchema = new mongoose.Schema({
     cartData: {
         type: Object,
         default: {}
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
     }
 }, { minimize: false });
 

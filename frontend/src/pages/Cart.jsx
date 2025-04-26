@@ -5,7 +5,7 @@ import { assets } from "../assets/assets";
 import CartTotal from "../components/CartTotal";
 
 const Cart = () => {
-  const { products, currency, cartItems, updateQuantity, navigate } =
+  const { products, currency, cartItems, updateQuantity, navigate, token } =
     useContext(ShopContext);
   const [cartData, setCartData] = useState([]);
 
@@ -29,7 +29,7 @@ const Cart = () => {
       }
     }
     setCartData(tempData);
-  }, [cartItems, products]); 
+  }, [cartItems, products]);
 
   return (
     <div className="border-t pt-14">
@@ -96,7 +96,13 @@ const Cart = () => {
 
               <div className="w-full text-end">
                 <button
-                  onClick={() => navigate("/place-order")}
+                  onClick={() => {
+                    if (token) {
+                      navigate("/place-order");
+                    } else {
+                      navigate("/login");
+                    }
+                  }}
                   className="my-8 cursor-pointer bg-black px-10 py-4 text-white hover:bg-gray-900 active:scale-95 active:bg-gray-900"
                 >
                   PROCEED TO CHECKOUT

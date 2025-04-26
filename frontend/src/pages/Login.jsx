@@ -2,16 +2,17 @@ import { useContext, useEffect, useState } from "react";
 import { ShopContext } from "../context/ShopContext";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { FaEye, FaEyeSlash } from "react-icons/fa"; // 👁️ Import icons
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Login = () => {
   const [currentState, setCurrentState] = useState("Login");
-  const { token, setToken, navigate, backendUrl } = useContext(ShopContext);
+  const { token, setToken, navigate, backendUrl, cartItems } =
+    useContext(ShopContext);
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false); // 👁️ New state
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const onSubmitHandler = async (e) => {
@@ -51,9 +52,14 @@ const Login = () => {
 
   useEffect(() => {
     if (token && navigate) {
-      navigate("/");
+      const isCartNotEmpty = Object.keys(cartItems).length > 0;
+      if (isCartNotEmpty) {
+        navigate("/cart");
+      } else {
+        navigate("/");
+      }
     }
-  }, [token, navigate]);
+  }, [token, navigate, cartItems]);
 
   return (
     <form
@@ -97,7 +103,7 @@ const Login = () => {
         />
         <span
           onClick={() => setShowPassword(!showPassword)}
-          className="absolute right-3 top-2.5 cursor-pointer text-gray-600"
+          className="absolute top-2.5 right-3 cursor-pointer text-gray-600"
         >
           {showPassword ? <FaEyeSlash /> : <FaEye />}
         </span>
@@ -124,8 +130,8 @@ const Login = () => {
         {loading
           ? "Please wait..."
           : currentState === "Login"
-          ? "Sign In"
-          : "Sign Up"}
+            ? "Sign In"
+            : "Sign Up"}
       </button>
     </form>
   );

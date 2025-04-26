@@ -72,7 +72,6 @@ const Orders = () => {
                 <p className="mt-1">
                   Date:{" "}
                   <span className="text-gray-400">
-                    {" "}
                     {new Date(item.date).toDateString()}{" "}
                   </span>
                 </p>
@@ -91,7 +90,12 @@ const Orders = () => {
 
               <button
                 onClick={loadOrderData}
-                className="cursor-pointer rounded-sm border px-4 py-2 text-sm font-medium hover:bg-blue-500 hover:text-white active:scale-90"
+                disabled={item.status === "Delivered"} // Disable if status is "Delivered"
+                className={`cursor-pointer rounded-sm border px-4 py-2 text-sm font-medium ${
+                  item.status === "Delivered"
+                    ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                    : "hover:bg-blue-500 hover:text-white active:scale-90"
+                }`}
               >
                 Track Order
               </button>

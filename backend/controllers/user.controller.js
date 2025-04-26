@@ -154,3 +154,48 @@ export const adminLogin = async (req, res) => {
         })
     }
 }
+
+
+//  Controller for fetching User Info
+export const getUserInfo = async (req, res) => {
+    try {
+        // 1. Get token from Authorization header
+        const authHeader = req.headers.authorization;
+
+        if (!authHeader || !authHeader.startsWith("Bearer ")) {
+            return res.status(401).json({
+                success: false,
+                message: "Authorization token missing or malformed",
+            });
+        }
+
+        const token = authHeader.split(" ")[1];
+
+        // 2. Verify token
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+        // 3. Fetch user by ID
+        const user = await userModel.findById(decoded.id).select("-password");
+
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: "User not found",
+            });
+        }
+
+        // 4. Send user data
+        res.status(200).json({
+            success: true,
+            message: "User fetched successfully",
+            user,
+        });
+
+    } catch (error) {
+        console.error("Error in getUserInfo: ", error.message);
+        res.status(500).json({
+            success: false,
+            message: "Server error",
+        });
+    }
+};

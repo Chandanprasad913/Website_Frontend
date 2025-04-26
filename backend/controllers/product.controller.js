@@ -79,8 +79,6 @@ export const addProduct = async (req, res) => {
 };
 
 
-
-
 //* Function for List product
 
 export const listProduct = async (req, res) => {
