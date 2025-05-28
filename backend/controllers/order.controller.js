@@ -1,6 +1,6 @@
 import orderModel from "../models/order.model.js";
 import userModel from "../models/user.model.js";
-import Stripe from "stripe"
+import Stripe from "stripe";
 
 
 // Global variables

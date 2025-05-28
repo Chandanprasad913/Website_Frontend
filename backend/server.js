@@ -32,6 +32,9 @@ app.get("/", (req, res) => {
     res.send("API is running");
 })
 
-app.listen(port, () => {
-    console.log(`Listening at http://localhost:${port}`);
-})
+app.listen(3002);
+console.log("Server LIsten at Link: http://localhost:3002");
+
+// app.listen(port, () => {
+//     console.log(`Listening at http://localhost:${port}`);
+// })
